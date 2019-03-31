@@ -15,9 +15,11 @@ import java.util.List;
 @RestController
 @Slf4j
 public class HelloWorld {
+    private DepartmentRepository repository;
 
-    @Autowired
-    DepartmentRepository repository;
+    public HelloWorld(@Autowired DepartmentRepository repository) {
+        this.repository = repository;
+    }
 
     @RequestMapping("/hello")
     public String index() {
@@ -29,7 +31,7 @@ public class HelloWorld {
 
         List<Department> departments = this.repository.findAll();
         for (Department department : departments) {
-            HelloWorld.log.info("employee: " + department.getName());
+            HelloWorld.log.info("department: " + department.getName());
         }
 
         return "Howdy! Check out the Logs to see the output...";
